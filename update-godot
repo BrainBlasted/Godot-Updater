@@ -1,0 +1,31 @@
+#!/bin/bash
+GDPATH=
+cd $GDPATH
+git pull
+scons --clean platform=x11 use_llvm=yes builtin_openssl=yes &&
+scons --no-cache platform=x11 use_llvm=yes builtin_openssl=yes &&
+mv $GDPATH/bin/godot.x11.tools.64.llvm $GDPATH/bin/godot &&
+chmod +x $GDPATH/bin/godot &&
+echo "Your update is ready in the godot/bin folder. Install at will." &&
+function yes_or_no {
+    while true; do
+        read -p "$* [y/n]: " yn
+        case $yn in
+            [Yy]*) return 0  ;;  
+            [Nn]*) echo "Aborted" ; return  1 ;;
+        esac
+    done
+}
+yes_or_no "Do you want to build export targets?" &&
+scons --clean platform=x11 tools=no target=release bits=64 builtin_openssl=yes &&
+scons --no-cache platform=x11 tools=no target=release bits=64 builtin_openssl=yes &&
+scons --clean platform=x11 tools=no target=release_debug bits=64 builtin_openssl=yes &&
+scons --no-cache platform=x11 tools=no target=release_debug bits=64 builtin_openssl=yes &&
+echo "Export targets for Linux/X11 are built." &&
+yes_or_no "Do you want to build targets for Windows?" &&
+scons --clean platform=windows tools=no target=release bits=64 builtin_openssl=yes &&
+scons --no-cache platform=windows tools=no target=release bits=64 builtin_openssl=yes &&
+scons --clean platform=windows tools=no target=release_debug bits=64 builtin_openssl=yes &&
+scons --no-cache platform=windows tools=no target=release_debug bits=64 builtin_openssl=yes &&
+echo "Export targets for Windows are built."
+cd 
