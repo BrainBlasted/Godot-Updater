@@ -1,5 +1,5 @@
 #!/bin/bash
-## Uncomment  -- clean lines only if you move your builds outside of $GDPATH/bin
+## Uncomment  --clean lines only if you move your builds outside of $GDPATH/bin
 GDPATH=
 cd $GDPATH
 git pull
@@ -17,14 +17,14 @@ function yes_or_no {
         esac
     done
 }
-yes_or_no "Do you want to build export targets?" &&
+yes_or_no "Do you want to build export targets for Linux?" &&
 # scons --clean platform=x11 tools=no target=release bits=64 builtin_openssl=yes &&
 scons --no-cache platform=x11 tools=no target=release bits=64 builtin_openssl=yes &&
 # scons --clean platform=x11 tools=no target=release_debug bits=64 builtin_openssl=yes &&
 scons --no-cache platform=x11 tools=no target=release_debug bits=64 builtin_openssl=yes &&
 mv $GDPATH/bin/godot.x11.opt.64 $GDPATH/bin/linux_x11_64_release &&
 mv $GDPATH/bin/godot.x11.opt.debug.64 $GDPATH/bin/linux_x11_64_debug &&
-echo "Export targets for Linux/X11 are built." &&
+echo "Export targets for Linux/X11 are built."
 yes_or_no "Do you want to build targets for Windows?" &&
 # scons --clean platform=windows tools=no target=release bits=64 builtin_openssl=yes &&
 scons --no-cache platform=windows tools=no target=release bits=64 builtin_openssl=yes &&
