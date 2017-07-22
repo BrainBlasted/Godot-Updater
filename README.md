@@ -2,6 +2,11 @@
 
 This is a simple bash script to update [Godot](https://github.com/godotengine/godot). It pulls the latest commits from master, then compiles the targets. Optionally can compile export targets for Linux/X11 and Windows.
 
+## Dependencies
+- Clang
+- Scons
+- Mingw64
+
 ## Usage
    1. With your editor of choice, set `$GDPATH` to where you have git cloned the godot source to, ex. `~/godot`
    2. Place the script in a folder where bash can find it. You can change this through your `~/.bashrc` file.
