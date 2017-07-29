@@ -6,7 +6,7 @@ This is a simple bash script to update [Godot](https://github.com/godotengine/go
 - Clang
 - Scons
 - Mingw64 (for building Linux targets)
-
+- All other Godot build dependencies
 ## Usage
    1. With your editor of choice, set `$GDPATH` to where you have git cloned the godot source to, ex. `~/godot`
    2. Place the script in a folder where bash can find it. You can change this through your `~/.bashrc` file.
