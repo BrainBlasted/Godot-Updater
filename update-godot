@@ -3,19 +3,6 @@
 
 GDPATH=""
 
-git pull
-
-if [ -d $GDPATH ] 
-then
-    cd $GDPATH 
-    update_godot
-    build_linux_targets
-    build_windows_targets
-else
-    echo "$GDPATH does not exist"
-    exit 1
-fi
-
 function yes_or_no {
     while true; do
         read -rp "$* [y/n]: " yn
@@ -58,5 +45,17 @@ function build_windows_targets {
     mv $GDPATH/bin/godot.windows.opt.debug.64.exe $GDPATH/bin/windows_64_debug.exe &&
     echo "Export targets for Windows are built."
 }
+
+if [ -d $GDPATH ] 
+then
+    cd $GDPATH 
+    git pull
+    update_godot
+    build_linux_targets
+    build_windows_targets
+else
+    echo "$GDPATH does not exist"
+    exit 1
+fi
 
 cd 
