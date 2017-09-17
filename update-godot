@@ -3,12 +3,22 @@
 
 GDPATH=""
 
-cd $GDPATH
 git pull
+
+if [ -d $GDPATH ] 
+then
+    cd $GDPATH 
+    update_godot
+    build_linux_targets
+    build_windows_targets
+else
+    echo "$GDPATH does not exist"
+    exit 1
+fi
 
 function yes_or_no {
     while true; do
-        read -p "$* [y/n]: " yn
+        read -rp "$* [y/n]: " yn
         case $yn in
             [Yy]*) return 0  ;;  
             [Nn]*) echo "Aborted" ; return  1 ;;
@@ -46,8 +56,4 @@ function build_windows_targets {
     echo "Export targets for Windows are built."
 }
 
-update_godot &&
-build_linux_targets
-build_windows_targets
-
-cd
+cd 
