@@ -28,9 +28,12 @@ function yes_or_no {
 
 function update_godot {
     # scons --clean platform=x11 use_llvm=yes builtin_openssl=yes &&
-    scons --no-cache platform=x11 use_llvm=yes builtin_openssl=yes &&
+    scons --no-cache platform=x11 use_llvm=yes builtin_openssl=yes mono_glue=no &&
     mv $GDPATH/bin/godot.x11.tools.64.llvm $GDPATH/bin/godot &&
     chmod +x $GDPATH/bin/godot &&
+    $GDPATH/bin/godot --generate-mono-glue modules/mono/glue &&
+    scons --no-cache platform=x11 use_llvm=yes builtin_openssl=yes &&
+    mv $GDPATH/bin/godot.x11.tools.64.llvm $GDPATH/bin/godot &&
     echo "Your update is ready in the godot/bin folder. Install at will."
 }
 
